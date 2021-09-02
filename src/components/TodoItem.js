@@ -11,7 +11,6 @@ function TodoItem({todo, handleDelete, editInput, setCurrentTodo}) {
   }
   const handleCheck = () =>{
     setChecked(!checked)
-    console.log("checking", checked)
   }
 
   const del = () =>{

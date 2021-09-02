@@ -15,7 +15,6 @@ function TodoForm() {
 
   const handleChange =(e)=>{
     setChange(e.target.value)
-    console.log(change)
   }
 
   const onSubmit =(e)=>{
@@ -51,7 +50,6 @@ function TodoForm() {
     container.current.scrollTo(0, 0)
   }
 
-  console.log("current todo ", currentTodo)
   return (
     <div className="all">
       <div ref={container} className="container">
