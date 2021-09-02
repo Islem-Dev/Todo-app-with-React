@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import TodoItem from './TodoItem'
 
 function TodoForm() {
@@ -6,7 +6,12 @@ function TodoForm() {
   const [todos, setTodos]=useState([])
   const [isEditing, setIsEditing]=useState(false)
   const [currentTodo, setCurrentTodo]=useState()
+  const container = useRef(null);
+  const input = useRef(null);
 
+  useEffect(() => {
+    input.current.focus()
+  }, [])
 
   const handleChange =(e)=>{
     setChange(e.target.value)
@@ -42,17 +47,19 @@ function TodoForm() {
   const editInput = text =>{
     setIsEditing(true)
     setChange(text)
+    input.current.focus()
+    container.current.scrollTo(0, 0)
   }
 
   console.log("current todo ", currentTodo)
   return (
     <div className="all">
-      <div className="container">
+      <div ref={container} className="container">
         <h3 align="center" className="py-1 stroke">What's the Plan for Today?</h3>
         <form onSubmit={onSubmit}>
           <div className="py-2 flexx">
-            <input className="form-control"  value={change} type="text" placeholder="Add todo..." onChange={handleChange} required/> &nbsp;
-            <input className="btn btn-primary" type="submit" value="Add Todo"/>
+            <input ref={input} className="form-control"  value={change} type="text" placeholder="Add todo..." onChange={handleChange} required/> &nbsp;
+            <input className="btn btn-primary" type="submit" value={isEditing? "Modify": "Add todo"}/>
           </div>
         </form>
         <ol className="mt-3">
